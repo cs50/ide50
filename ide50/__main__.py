@@ -137,7 +137,7 @@ def main():
             # https://stackoverflow.com/a/952952/5156190
             ports_ = [f"--publish={port}:{port}" for port in (C9_PORT, 8080, 8081, 8082)]
             container = subprocess.check_output([*cmd, *ports_, args.image],
-                stderr=subprocess.STDOUT).decode().rstrip()
+                                                stderr=subprocess.STDOUT).decode().rstrip()
 
         except subprocess.CalledProcessError:
             try:
