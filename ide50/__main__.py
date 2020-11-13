@@ -89,74 +89,65 @@ def main():
             "--all",
             "--filter", f"label={LABEL}",
             "--format", "{{.ID}}"
-        ]).decode()
-
-        if container:
-            print(_("Running on {} (Run ide50 -S to stop)").format(f"http://{ports(container.split()[0], C9_PORT)}/"))
-            sys.exit(0)
-
+        ]).decode().rstrip()
     except subprocess.CalledProcessError:
         sys.exit(_("Failed to list containers"))
 
-    # Ensure directory exists
-    directory = os.path.realpath(args.directory)
-    if not os.path.isdir(directory):
-        parser.error(_("{}: no such directory").format(args.directory))
+    if not container:
 
-    # Check for newer image
-    if not args.fast:
-        pull(args.image)
+        # Ensure directory exists
+        directory = os.path.realpath(args.directory)
+        if not os.path.isdir(directory):
+            parser.error(_("{}: no such directory").format(args.directory))
 
-    # Options
-    options = ["--detach",
-               "--env", "C9_HOSTNAME=0.0.0.0",
-               "--env", "CS50_IDE_TYPE=offline",
-               "--label", LABEL,
-               "--rm",
-               "--security-opt", "seccomp=unconfined",  # https://stackoverflow.com/q/35860527#comment62818827_35860527, https://github.com/apple/swift-docker/issues/9#issuecomment-328218803
-               "--volume", directory + ":/home/ubuntu/workspace"]
+        # Check for newer image
+        if not args.fast:
+            pull(args.image)
 
-    # Mount each dotfile in user's $HOME read-only in container's $HOME
-    for dotfile in args.dotfile:
-        home = os.path.join(os.path.expanduser("~"), "")
-        if dotfile.startswith("/") and not dotfile.startswith(home):
-            sys.exit(_("{}: not in your $HOME").format(dotfile))
-        elif dotfile.startswith(os.path.join("~", "")):
-            dotfile = os.path.expanduser(dotfile)
-        else:
-            dotfile = os.path.join(home, dotfile)
-        if not os.path.exists(dotfile):
-            sys.exit(_("{}: No such file or directory").format(dotfile))
-        if not dotfile[len(home):].startswith("."):
-            sys.exit(_("{}: Not a dotfile").format(dotfile))
-        options += ["--volume", "{}:/home/ubuntu/{}:ro".format(dotfile, dotfile[len(home):])]
+        # Options
+        options = ["--detach",
+                   "--env", "C9_HOSTNAME=0.0.0.0",
+                   "--env", "CS50_IDE_TYPE=offline",
+                   "--label", LABEL,
+                   "--rm",
+                   "--security-opt", "seccomp=unconfined",  # https://stackoverflow.com/q/35860527#comment62818827_35860527, https://github.com/apple/swift-docker/issues/9#issuecomment-328218803
+                   "--volume", directory + ":/home/ubuntu/workspace"]
 
-    # Mount directory in new container
-    try:
+        # Mount each dotfile in user's $HOME read-only in container's $HOME
+        for dotfile in args.dotfile:
+            home = os.path.join(os.path.expanduser("~"), "")
+            if dotfile.startswith("/") and not dotfile.startswith(home):
+                sys.exit(_("{}: not in your $HOME").format(dotfile))
+            elif dotfile.startswith(os.path.join("~", "")):
+                dotfile = os.path.expanduser(dotfile)
+            else:
+                dotfile = os.path.join(home, dotfile)
+            if not os.path.exists(dotfile):
+                sys.exit(_("{}: No such file or directory").format(dotfile))
+            if not dotfile[len(home):].startswith("."):
+                sys.exit(_("{}: Not a dotfile").format(dotfile))
+            options += ["--volume", "{}:/home/ubuntu/{}:ro".format(dotfile, dotfile[len(home):])]
 
         # Spawn container
         try:
 
+            cmd = ["docker", "run", *options]
+
             # Publish container's ports to the host
             # https://stackoverflow.com/a/952952/5156190
-            container = subprocess.check_output(["docker", "run", *options,
-                                                 *[item for sublist in [['--publish', f'{port}:{port}'] for port in (C9_PORT, 8080, 8081, 8082)] for item in sublist],
-                                                 args.image], stderr=subprocess.STDOUT).decode().rstrip()
+            ports_ = [f"--publish={port}:{port}" for port in (C9_PORT, 8080, 8081, 8082)]
+            container = subprocess.check_output([*cmd, *ports_, args.image],
+                stderr=subprocess.STDOUT).decode().rstrip()
 
         except subprocess.CalledProcessError:
+            try:
+                # Publish all exposed ports to random ports
+                container = subprocess.check_output([*cmd, "--publish-all", args.image]).decode().rstrip()
+            except subprocess.CalledProcessError:
+                sys.exit(_("Failed to start container"))
 
-            # Publish all exposed ports to random ports
-            container = subprocess.check_output(["docker", "run", *options,
-                                                 "--publish-all",
-                                                 args.image]).decode().rstrip()
-
-        # List port mappings
-        print(ports(container))
-        print(_("Running on {} (Run ide50 -S to stop)").format(f"http://{ports(container.split()[0], C9_PORT)}/"))
-    except subprocess.CalledProcessError:
-        sys.exit(_("Failed to start container"))
-    else:
-        sys.exit(0)
+    print(ports(container))
+    print(_("Running on {} (Run ide50 -S to stop)").format(f"http://{ports(container.split()[0], C9_PORT)}/"))
 
 
 def ports(container, port=None):
