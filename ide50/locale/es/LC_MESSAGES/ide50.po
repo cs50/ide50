@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-13 14:46-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: __main__.py:32
+msgid "dotfile in your $HOME to mount read-only in container's $HOME"
+msgstr ""
+
+#: __main__.py:33
+msgid "start IMAGE, else {}"
+msgstr ""
+
+#: __main__.py:34
+msgid "directory to mount, else $PWD"
+msgstr ""
+
+#: __main__.py:35
+msgid "stop container"
+msgstr ""
+
+#: __main__.py:40
+msgid "skip autoupdate"
+msgstr ""
+
+#: __main__.py:41
+msgid "update only"
+msgstr ""
+
+#: __main__.py:53
+msgid ""
+"A newer version is available. Run `pip3 install --upgrade ide50` to upgrade."
+msgstr ""
+
+#: __main__.py:57
+msgid "Docker not installed"
+msgstr ""
+
+#: __main__.py:63
+msgid "Docker not running"
+msgstr ""
+
+#: __main__.py:65
+msgid "Docker not responding"
+msgstr ""
+
+#: __main__.py:82
+msgid "Failed to stop container"
+msgstr ""
+
+#: __main__.py:98 __main__.py:158
+msgid "Running on {} (Run ide50 -S to stop)"
+msgstr ""
+
+#: __main__.py:102
+msgid "Failed to list containers"
+msgstr ""
+
+#: __main__.py:107
+msgid "{}: no such directory"
+msgstr ""
+
+#: __main__.py:126
+msgid "{}: not in your $HOME"
+msgstr ""
+
+#: __main__.py:132
+msgid "{}: No such file or directory"
+msgstr ""
+
+#: __main__.py:134
+msgid "{}: Not a dotfile"
+msgstr ""
+
+#: __main__.py:160
+msgid "Failed to start container"
+msgstr ""

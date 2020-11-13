@@ -1,0 +1,9 @@
+.*
+*.egg-info
+*.mo
+*.pyc
+!.gitignore
+!.travis.yml
+build/
+dist/
+__pycache__

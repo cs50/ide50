@@ -1,0 +1,22 @@
+language: python
+python: '3.5'
+branches:
+  except: "/^v\\d/"
+before_install: pip install babel
+install: true
+script: python setup.py compile_catalog
+deploy:
+- provider: script
+  script: 'curl --fail --data "{ \"tag_name\": \"v$(python setup.py --version)\",
+    \"target_commitish\": \"$TRAVIS_COMMIT\", \"name\": \"v$(python setup.py --version)\"
+    }" --user bot50:$GITHUB_TOKEN https://api.github.com/repos/$TRAVIS_REPO_SLUG/releases'
+  on:
+    branch: master
+- provider: pypi
+  user: "$PYPI_USERNAME"
+  password: "$PYPI_PASSWORD"
+  on:
+    branch: master
+notifications:
+  slack:
+    secure: Gp8DvhZDWu6hDARbY4zRD/YSyaeLlRsbVTOaV/0B29eNvLWzKSrlMPDSvjvn9Jlg347Yd8YHwPsK4hHtcZlW5CLqTmrBDL0zpLotM5phc5abFnHUnHh8uHpCWi1gb3dMAAztgCv0qZ4B/cfLN4d7B9+BlqoSQpDkQPOzXSNOxHhi/DRiz/Fgq/TNxa5ay9u/UGx/tdo+/aiJ9pclcZGLQV22AemnaBFX+TkOt8LiU0TtC2rJtGBQ0pezshD4yProORNdLDA053GcKfzWfORtjruWQ4nIc4ONc0fazgn/uTSFeF0wxNmt4CQb2tijL9VyvJKlMf3G7Oncjfq2+zcVSzTum90DuTs6iUj6zqcBO1Aa5lTxvykjMOGq5NtnhE17F6QYlbyj662gBjCVLGtfJlFYgJmvYteKbBCf8fVHDWmuGyNnr8w4FYySpADqqFzRtCWvmEJjwsMnJMfOFXIBo3w1SDB0UevmpLhXeHaslIY8Q2R8hu9CIM/M9GC5nnS000vB7UL4LVG8KfmRU7mio6C+ehRscp+wejWLI0w/m9wpYBVCUwN1CA5vSQhRmUug5N4b/AdmHkwn3lXB4FWJ+kWWxoaxe6OsAYBawA6/ylIkQ5ZOwjgz15YrYk9vKRUeq2Fkhnx02j0V0TsLWWx5GxdK1EOD+HVtE1f+tquWd7k=
