@@ -2,15 +2,12 @@ import argparse
 import gettext
 import json
 import os
-import pkg_resources
-import re
-import requests
-import shlex
 import shutil
-import sys
 import subprocess
+import sys
 
-import inflect
+import pkg_resources
+import requests
 
 from . import __version__
 
@@ -21,8 +18,8 @@ LABEL = "ide50"
 C9_PORT = 1337
 
 # Internationalization
-t = gettext.translation("ide50", pkg_resources.resource_filename("ide50", "locale"), fallback=True)
-t.install()
+TRANSLATIONS = gettext.translation("ide50", pkg_resources.resource_filename("ide50", "locale"), fallback=True)
+TRANSLATIONS.install()
 
 
 def main():
@@ -74,8 +71,8 @@ def main():
                 "--format", "{{.ID}}"
             ]).decode()
 
-            for ID in stdout.rstrip().splitlines():
-                subprocess.check_call(["docker", "stop", ID])
+            for id_ in stdout.rstrip().splitlines():
+                subprocess.check_call(["docker", "stop", id_])
 
             sys.exit(0)
         except subprocess.CalledProcessError:
@@ -143,15 +140,15 @@ def main():
             # Publish container's ports to the host
             # https://stackoverflow.com/a/952952/5156190
             container = subprocess.check_output(["docker", "run", *options,
-                                               *[item for sublist in [['--publish', f'{port}:{port}'] for port in (C9_PORT, 8080, 8081, 8082)] for item in sublist],
-                                                args.image], stderr=subprocess.STDOUT).decode().rstrip()
+                                                 *[item for sublist in [['--publish', f'{port}:{port}'] for port in (C9_PORT, 8080, 8081, 8082)] for item in sublist],
+                                                 args.image], stderr=subprocess.STDOUT).decode().rstrip()
 
         except subprocess.CalledProcessError:
 
             # Publish all exposed ports to random ports
             container = subprocess.check_output(["docker", "run", *options,
-                                                "--publish-all",
-                                                args.image]).decode().rstrip()
+                                                 "--publish-all",
+                                                 args.image]).decode().rstrip()
 
         # List port mappings
         print(ports(container))
