@@ -1,10 +1,14 @@
+import signal
+import sys
+
+signal.signal(signal.SIGINT, lambda signum, frame: sys.exit(1))
+
 import argparse
 import gettext
 import json
 import os
 import shutil
 import subprocess
-import sys
 
 import pkg_resources
 import requests
