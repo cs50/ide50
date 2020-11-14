@@ -19,6 +19,7 @@ from . import __version__
 IMAGE = "cs50/ide:offline"
 LABEL = "ide50"
 
+# Port to use
 C9_PORT = 1337
 
 # Internationalization
@@ -27,6 +28,7 @@ TRANSLATIONS.install()
 
 
 def main():
+
     # Parse command-line arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--dotfile", action="append", default=[],
@@ -87,6 +89,7 @@ def main():
         pull(args.image)
         sys.exit(0)
 
+    # Check for running containers
     try:
         container = subprocess.check_output([
             "docker", "ps",
@@ -97,6 +100,7 @@ def main():
     except subprocess.CalledProcessError:
         sys.exit(_("Failed to list containers"))
 
+    # If IDE not already running
     if not container:
 
         # Ensure directory exists
@@ -135,23 +139,24 @@ def main():
         # Spawn container
         try:
 
-            cmd = ["docker", "run", *options]
-
             # Publish container's ports to the host
             # https://stackoverflow.com/a/952952/5156190
+            cmd = ["docker", "run", *options]
             ports_ = [f"--publish={port}:{port}" for port in (C9_PORT, 8080, 8081, 8082)]
             container = subprocess.check_output([*cmd, *ports_, args.image],
                                                 stderr=subprocess.STDOUT).decode().rstrip()
 
         except subprocess.CalledProcessError:
+
+            # Publish all exposed ports to random ports
             try:
-                # Publish all exposed ports to random ports
                 container = subprocess.check_output([*cmd, "--publish-all", args.image]).decode().rstrip()
             except subprocess.CalledProcessError:
                 sys.exit(_("Failed to start container"))
 
+    # List port mappings
     print(ports(container))
-    print(_("Running on {} (Run ide50 -S to stop)").format(f"http://{ports(container.split()[0], C9_PORT)}/"))
+    print(_("Running on {}. Run `ide50 -S` to stop.").format(f"http://{ports(container.split()[0], C9_PORT)}/"))
 
 
 def ports(container, port=None):
@@ -159,7 +164,6 @@ def ports(container, port=None):
     cmd = ["docker", "port", container]
     if port:
         cmd.append(str(port))
-
     return subprocess.check_output(cmd).decode().rstrip()
 
 
@@ -176,7 +180,6 @@ def pull(image):
         repository, tag = image.split(":") if ":" in image else (image, "latest")
         if "/" not in repository:
             repository = "library/" + repository
-
         response = requests.get(f"https://hub.docker.com/v2/repositories/{repository}/tags/{tag}").json()["images"][0]
 
         # Pull latest if digests don't match
