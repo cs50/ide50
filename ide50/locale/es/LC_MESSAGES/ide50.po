@@ -1,9 +1,3 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
@@ -11,73 +5,73 @@ msgstr ""
 
 #: __main__.py:32
 msgid "dotfile in your $HOME to mount read-only in container's $HOME"
-msgstr ""
+msgstr "dotfile en su $HOME para montar solo lectura en $HOME del contenedor"
 
 #: __main__.py:33
 msgid "start IMAGE, else {}"
-msgstr ""
+msgstr "iniciar IMAGEN, de lo contrario {}"
 
 #: __main__.py:34
 msgid "directory to mount, else $PWD"
-msgstr ""
+msgstr "directorio para montar, de lo contrario $PWD"
 
 #: __main__.py:35
 msgid "stop container"
-msgstr ""
+msgstr "detener contenedor"
 
 #: __main__.py:40
 msgid "skip autoupdate"
-msgstr ""
+msgstr "omitir actualización automática"
 
 #: __main__.py:41
 msgid "update only"
-msgstr ""
+msgstr "solo actualizar"
 
 #: __main__.py:53
 msgid ""
 "A newer version is available. Run `pip3 install --upgrade ide50` to upgrade."
-msgstr ""
+msgstr "Una nueva versión está disponible. Ejecute `pip3 install --upgrade ide50` para actualizar."
 
 #: __main__.py:57
 msgid "Docker not installed"
-msgstr ""
+msgstr "Docker no instalado"
 
 #: __main__.py:63
 msgid "Docker not running"
-msgstr ""
+msgstr "Docker no se está ejecutando"
 
 #: __main__.py:65
 msgid "Docker not responding"
-msgstr ""
+msgstr "Docker no responde"
 
 #: __main__.py:82
 msgid "Failed to stop container"
-msgstr ""
+msgstr "No se pudo detener el contenedor"
 
 #: __main__.py:98 __main__.py:158
 msgid "Running on {} (Run ide50 -S to stop)"
-msgstr ""
+msgstr "Ejecutando en {} (Ejecute ide50 -S para detener)"
 
 #: __main__.py:102
 msgid "Failed to list containers"
-msgstr ""
+msgstr "No se pudieron enumerar los contenedores"
 
 #: __main__.py:107
 msgid "{}: no such directory"
-msgstr ""
+msgstr "{}: no existe ese directorio"
 
 #: __main__.py:126
 msgid "{}: not in your $HOME"
-msgstr ""
+msgstr "{}: no en tu $HOME"
 
 #: __main__.py:132
 msgid "{}: No such file or directory"
-msgstr ""
+msgstr "{}: El archivo o directorio no existe"
 
 #: __main__.py:134
 msgid "{}: Not a dotfile"
-msgstr ""
+msgstr "{}: No es un dotfile"
 
 #: __main__.py:160
 msgid "Failed to start container"
-msgstr ""
+msgstr "No se pudo iniciar el contenedor"
