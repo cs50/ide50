@@ -1,4 +1,4 @@
-""" Manage CS50 IDE offline """
+"""Manage CS50 IDE offline"""
 
 import signal
 import sys
@@ -31,7 +31,7 @@ TRANSLATIONS.install()
 
 
 def main():
-    """ Entrypoint of script """
+    """Entrypoint of script"""
     # Parse command-line arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("-V", "--version", action="version",
@@ -98,7 +98,7 @@ def container_info(container):
 
 
 def get_container():
-    """ Return ID(s) of running container(s), if any"""
+    """Return ID(s) of running container(s), if any"""
     try:
         return subprocess.check_output([
             "docker", "ps",
