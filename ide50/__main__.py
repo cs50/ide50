@@ -93,7 +93,7 @@ def container_info(container):
     """Print container port mappings and URL"""
     # List port mappings
     print(ports(container))
-    print(_("Running on {}. Run `ide50 -S` to stop.").format(
+    print(_("Running on {}. Run `ide50 stop` to stop.").format(
         f"http://{ports(container.split()[0], C9_PORT)}/"))
 
 
@@ -115,6 +115,7 @@ def ports(container, port=None):
     cmd = ["docker", "port", container]
     if port:
         cmd.append(str(port))
+
     return subprocess.check_output(cmd).decode().rstrip()
 
 
@@ -158,6 +159,7 @@ def start(args):
         except AssertionError:
             print(_("A newer version is available. Run `pip3 install --upgrade ide50` to upgrade."))
 
+    # Get running container
     container = get_container()
     if not container:
         # Ensure directory exists
@@ -214,6 +216,7 @@ def start(args):
             except subprocess.CalledProcessError:
                 sys.exit(_("Failed to start container"))
 
+    # Print port mappings and URL
     container_info(container)
 
 
