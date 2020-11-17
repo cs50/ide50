@@ -35,14 +35,14 @@ def main():
                         help=_("dotfile in your $HOME to mount read-only in container's $HOME"), metavar="DOTFILE")
     parser.add_argument("-i", "--image", default=IMAGE, help=_("start IMAGE, else {}").format(IMAGE), metavar="IMAGE")
     parser.add_argument("directory", default=os.getcwd(), metavar="DIRECTORY", nargs="?", help=_("directory to mount, else $PWD"))
-    parser.add_argument("-S", "--stop", action="store_true", help=_("stop container"))
-    parser.add_argument("-s", "--status", action="store_true", help=_("show container status"))
-    parser.add_argument("-V", "--version", action="version", version="%(prog)s {}".format(__version__) if __version__ else "Locally installed.")
 
     # Mutually exclusive arguments
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-f", "--fast", action="store_true", help=_("skip autoupdate"))
     group.add_argument("-u", "--update", action="store_true", help=_("update only"))
+    group.add_argument("-S", "--stop", action="store_true", help=_("stop container"))
+    group.add_argument("-s", "--status", action="store_true", help=_("show container status"))
+    group.add_argument("-V", "--version", action="version", version="%(prog)s {}".format(__version__) if __version__ else "Locally installed.")
 
     args = parser.parse_args()
 
