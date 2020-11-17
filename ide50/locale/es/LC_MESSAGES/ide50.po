@@ -1,77 +1,93 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: sysadmins.cs50.harvard.edu\n"
+"POT-Creation-Date: 2020-11-17 10:52-0500\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: __main__.py:32
+#: __main__.py:29
 msgid "dotfile in your $HOME to mount read-only in container's $HOME"
 msgstr "dotfile en su $HOME para montar solo lectura en $HOME del contenedor"
 
-#: __main__.py:33
+#: __main__.py:30
 msgid "start IMAGE, else {}"
 msgstr "iniciar IMAGEN, de lo contrario {}"
 
-#: __main__.py:34
+#: __main__.py:31
 msgid "directory to mount, else $PWD"
 msgstr "directorio para montar, de lo contrario $PWD"
 
-#: __main__.py:35
+#: __main__.py:32
 msgid "stop container"
 msgstr "detener contenedor"
 
-#: __main__.py:40
-msgid "skip autoupdate"
-msgstr "omitir actualización automática"
+#: __main__.py:33
+msgid "show container status"
+msgstr "mostrar estado de contenedores"
 
-#: __main__.py:41
+#: __main__.py:38
+msgid "skip autoupdate"
+msgstr "omitir actualizacin automtica"
+
+#: __main__.py:39
 msgid "update only"
 msgstr "solo actualizar"
 
-#: __main__.py:53
+#: __main__.py:51
 msgid ""
 "A newer version is available. Run `pip3 install --upgrade ide50` to upgrade."
-msgstr "Una nueva versión está disponible. Ejecute `pip3 install --upgrade ide50` para actualizar."
+msgstr ""
+"Una nueva versin est disponible. Ejecute `pip3 install --upgrade ide50` para "
+"actualizar."
 
-#: __main__.py:57
+#: __main__.py:55
 msgid "Docker not installed"
 msgstr "Docker no instalado"
 
-#: __main__.py:63
+#: __main__.py:61
 msgid "Docker not running"
-msgstr "Docker no se está ejecutando"
+msgstr "Docker no se est ejecutando"
 
-#: __main__.py:65
+#: __main__.py:63
 msgid "Docker not responding"
 msgstr "Docker no responde"
 
-#: __main__.py:82
-msgid "Failed to stop container"
-msgstr "No se pudo detener el contenedor"
-
-#: __main__.py:98 __main__.py:158
-msgid "Running on {} (Run ide50 -S to stop)"
-msgstr "Ejecutando en {} (Ejecute ide50 -S para detener)"
-
-#: __main__.py:102
+#: __main__.py:73
 msgid "Failed to list containers"
 msgstr "No se pudieron enumerar los contenedores"
 
-#: __main__.py:107
+#: __main__.py:82
+msgid "Stopped"
+msgstr "Detenido"
+
+#: __main__.py:85
+msgid "Failed to stop container"
+msgstr "No se pudo detener el contenedor"
+
+#: __main__.py:94
+msgid "No containers are running"
+msgstr "No hay contenedores ejecutando"
+
+#: __main__.py:100
 msgid "{}: no such directory"
 msgstr "{}: no existe ese directorio"
 
-#: __main__.py:126
+#: __main__.py:119
 msgid "{}: not in your $HOME"
 msgstr "{}: no en tu $HOME"
 
-#: __main__.py:132
+#: __main__.py:125
 msgid "{}: No such file or directory"
 msgstr "{}: El archivo o directorio no existe"
 
-#: __main__.py:134
+#: __main__.py:127
 msgid "{}: Not a dotfile"
 msgstr "{}: No es un dotfile"
 
-#: __main__.py:160
+#: __main__.py:146
 msgid "Failed to start container"
 msgstr "No se pudo iniciar el contenedor"
+
+#: __main__.py:149
+msgid "Running on {} (Run ide50 -S to stop)"
+msgstr "Ejecutando en {} (Ejecute ide50 -S para detener)"

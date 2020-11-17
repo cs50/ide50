@@ -36,6 +36,7 @@ def main():
     parser.add_argument("-i", "--image", default=IMAGE, help=_("start IMAGE, else {}").format(IMAGE), metavar="IMAGE")
     parser.add_argument("directory", default=os.getcwd(), metavar="DIRECTORY", nargs="?", help=_("directory to mount, else $PWD"))
     parser.add_argument("-S", "--stop", action="store_true", help=_("stop container"))
+    parser.add_argument("-s", "--status", action="store_true", help=_("show container status"))
     parser.add_argument("-V", "--version", action="version", version="%(prog)s {}".format(__version__) if __version__ else "Locally installed.")
 
     # Mutually exclusive arguments
@@ -67,29 +68,6 @@ def main():
     except subprocess.TimeoutExpired:
         sys.exit(_("Docker not responding"))
 
-    # Stop containers
-    if args.stop:
-        try:
-            stdout = subprocess.check_output([
-                "docker", "ps",
-                "--all",
-                "--filter", f"label={LABEL}",
-                "--format", "{{.ID}}"
-            ]).decode()
-
-            for id_ in stdout.rstrip().splitlines():
-                subprocess.check_call(["docker", "stop", id_])
-
-            sys.exit(0)
-        except subprocess.CalledProcessError:
-            sys.exit(_("Failed to stop container"))
-
-    # Update only
-    if args.update:
-        pull(args.image)
-        sys.exit(0)
-
-    # Check for running containers
     try:
         container = subprocess.check_output([
             "docker", "ps",
@@ -100,8 +78,27 @@ def main():
     except subprocess.CalledProcessError:
         sys.exit(_("Failed to list containers"))
 
-    # If IDE not already running
+    # Stop containers
+    if args.stop and container:
+        try:
+            for id_ in container.splitlines():
+                subprocess.check_call(["docker", "stop", id_],
+                                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+            print(_("Stopped"))
+            sys.exit(0)
+        except subprocess.CalledProcessError:
+            sys.exit(_("Failed to stop container"))
+
+    # Update only
+    if args.update:
+        pull(args.image)
+        sys.exit(0)
+
     if not container:
+        if args.status:
+            print(_("No containers are running"))
+            sys.exit(0)
 
         # Ensure directory exists
         directory = os.path.realpath(args.directory)
