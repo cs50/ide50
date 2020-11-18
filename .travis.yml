@@ -1,5 +1,5 @@
 language: python
-python: "3.6"
+python: '3.6'
 branches:
   except: "/^v\\d/"
 before_install: pip install babel
@@ -11,12 +11,12 @@ deploy:
     \"target_commitish\": \"$TRAVIS_COMMIT\", \"name\": \"v$(python setup.py --version)\"
     }" --user bot50:$GITHUB_TOKEN https://api.github.com/repos/$TRAVIS_REPO_SLUG/releases'
   on:
-    branch: master
+    branch: main
 - provider: pypi
   user: "$PYPI_USERNAME"
   password: "$PYPI_PASSWORD"
   on:
-    branch: master
+    branch: main
 notifications:
   slack:
-    secure: Gp8DvhZDWu6hDARbY4zRD/YSyaeLlRsbVTOaV/0B29eNvLWzKSrlMPDSvjvn9Jlg347Yd8YHwPsK4hHtcZlW5CLqTmrBDL0zpLotM5phc5abFnHUnHh8uHpCWi1gb3dMAAztgCv0qZ4B/cfLN4d7B9+BlqoSQpDkQPOzXSNOxHhi/DRiz/Fgq/TNxa5ay9u/UGx/tdo+/aiJ9pclcZGLQV22AemnaBFX+TkOt8LiU0TtC2rJtGBQ0pezshD4yProORNdLDA053GcKfzWfORtjruWQ4nIc4ONc0fazgn/uTSFeF0wxNmt4CQb2tijL9VyvJKlMf3G7Oncjfq2+zcVSzTum90DuTs6iUj6zqcBO1Aa5lTxvykjMOGq5NtnhE17F6QYlbyj662gBjCVLGtfJlFYgJmvYteKbBCf8fVHDWmuGyNnr8w4FYySpADqqFzRtCWvmEJjwsMnJMfOFXIBo3w1SDB0UevmpLhXeHaslIY8Q2R8hu9CIM/M9GC5nnS000vB7UL4LVG8KfmRU7mio6C+ehRscp+wejWLI0w/m9wpYBVCUwN1CA5vSQhRmUug5N4b/AdmHkwn3lXB4FWJ+kWWxoaxe6OsAYBawA6/ylIkQ5ZOwjgz15YrYk9vKRUeq2Fkhnx02j0V0TsLWWx5GxdK1EOD+HVtE1f+tquWd7k=
+    secure: qmUeGAIrqT/qQw3rhGZ6yrYreqVUatAo6GzABHJDdqfGBEYqLR75b1REVSfr7V6z+0hiGFmq8DmrU5PAQ6p2h4nEpRHAZQloY9qtyaxo1iiGy59HDgG9ZPFmX4ljZ8nBmRJGAW20kbx6PeAWRWLO3Wojh6V8DiqX8+VgF636RT/JWuGPaZpsdW0P1pVot5KWrtKoXT9/haSBu+0C+joOXxhjTY/mjdPL8lwrgCleU/ajEUBgGUXvrK/HMMPmdh56mjmlLnL9F3pEXt/vvI5H10c1Ej6z8sgywjxB3+63jsB+BjuHcrOYGc5RMlpsXGgy1By1HDlCSqHxFz/W0i8I0MpWSdifB4x1nqAoZeRLTcQqQft09+n6LWNSOQYDyYSN0Rv/4O5kx89KOE6+pXcjZJcv6QtKq8SgH9AiS2aTBqeLXFfVaDBbb83CJGmD317LGtraLIrnc+GXZb40IES3BufOoQ03tu916gbvUP2OKUZGwf2oR14kQzKcl+S+GZwTaHJBgJbplOdsTwwW0aP5yc3WgksrAp1yVm7zuBNq8SNbECRtVdOGIukQ1wJcaIxE/HAabX6J7QKyAfPW6V6RnC1+pepcIfh/Mfx/j8pm8K7hRTIXpB6MMWrWe/0NsS3Oo7VQY95SZWJZPaNboyYMJQYMwLIu9vtE5BZezpbcL6c=
