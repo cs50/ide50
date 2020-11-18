@@ -39,13 +39,13 @@ def main():
 
     subparsers = parser.add_subparsers()
 
-    start_parser = subparsers.add_parser("start")
+    start_parser = subparsers.add_parser("start", help=_("start container"))
     start_parser.add_argument("-d", "--dotfile", action="append", default=[],
                               help=_("dotfile in your $HOME to mount read-only in container's"
                                      " $HOME"), metavar="DOTFILE")
 
     start_parser.add_argument("-i", "--image", default=IMAGE,
-                              help=_("start IMAGE, else {}").format(IMAGE),
+                              help=_("use IMAGE, else {}").format(IMAGE),
                               metavar="IMAGE")
 
     start_parser.add_argument("directory", default=os.getcwd(), metavar="DIRECTORY", nargs="?",
@@ -54,13 +54,13 @@ def main():
     start_parser.add_argument("-f", "--fast", action="store_true", help=_("skip autoupdate"))
     start_parser.set_defaults(func=start)
 
-    status_parser = subparsers.add_parser("status")
+    status_parser = subparsers.add_parser("status", help=_("show container status"))
     status_parser.set_defaults(func=status)
 
-    stop_parser = subparsers.add_parser("stop")
+    stop_parser = subparsers.add_parser("stop", help=_("stop container"))
     stop_parser.set_defaults(func=stop)
 
-    update_parser = subparsers.add_parser("update")
+    update_parser = subparsers.add_parser("update", help=_("update only"))
     update_parser.add_argument("-i", "--image", default=IMAGE,
                               help=_("update IMAGE, else {}").format(IMAGE),
                               metavar="IMAGE")
