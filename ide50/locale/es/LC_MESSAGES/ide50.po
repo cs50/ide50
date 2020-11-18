@@ -7,7 +7,7 @@ msgstr ""
 
 #: __main__.py:42
 msgid "start container"
-msgstr ""
+msgstr "iniciar contenedor"
 
 #: __main__.py:44
 msgid "dotfile in your $HOME to mount read-only in container's $HOME"
@@ -15,7 +15,7 @@ msgstr "dotfile en su $HOME para montar solo lectura en $HOME del contenedor"
 
 #: __main__.py:48
 msgid "use IMAGE, else {}"
-msgstr ""
+msgstr "usar IMAGE, de lo contrario {}"
 
 #: __main__.py:52
 msgid "directory to mount, else $PWD"
@@ -39,7 +39,7 @@ msgstr "solo actualizar"
 
 #: __main__.py:65
 msgid "update IMAGE, else {}"
-msgstr ""
+msgstr "actualizar IMAGE, de lo contrario {}"
 
 #: __main__.py:79
 msgid "Docker not installed"
@@ -55,7 +55,7 @@ msgstr "Docker no responde"
 
 #: __main__.py:96
 msgid "Running on {}. Run `ide50 stop` to stop."
-msgstr ""
+msgstr "Ejecutando en {}. Ejecute `ide50 stop` para detener."
 
 #: __main__.py:110
 msgid "Failed to list containers"
@@ -102,4 +102,4 @@ msgstr "No se pudo detener el contenedor"
 
 #: __main__.py:250
 msgid "Updated {}"
-msgstr ""
+msgstr "Actualizado {}"
