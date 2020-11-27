@@ -69,7 +69,10 @@ def main():
 
     args = parser.parse_args()
     check_docker()
-    args.func(args)
+    try:
+        args.func(args)
+    except AttributeError:
+        parser.print_help()
 
 
 def check_docker():
