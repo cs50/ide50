@@ -176,7 +176,6 @@ def start(args):
 
         # Options
         options = ["--detach",
-                   "--env", "C9_HOSTNAME=0.0.0.0",
                    "--env", "CS50_IDE_TYPE=offline",
                    "--label", LABEL,
                    "--rm",
