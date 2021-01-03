@@ -18,7 +18,7 @@ import requests
 from . import __version__
 
 # Image to use
-IMAGE = "cs50/ide:offline"
+IMAGE = "cs50/ide:latest"
 LABEL = "ide50"
 
 # Port to use
