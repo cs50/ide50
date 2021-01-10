@@ -182,7 +182,7 @@ def start(args):
                    # https://stackoverflow.com/q/35860527#comment62818827_35860527
                    # https://github.com/apple/swift-docker/issues/9#issuecomment-328218803
                    "--security-opt", "seccomp=unconfined",
-                   "--volume", directory + ":/home/ubuntu/workspace"]
+                   "--volume", directory + ":/home/ubuntu"]
 
         # Mount each dotfile in user's $HOME read-only in container's $HOME
         for dotfile in args.dotfile:
