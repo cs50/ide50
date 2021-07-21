@@ -23,6 +23,6 @@ setup(
         "console_scripts": ["ide50=ide50.__main__:main"]
     },
     url="https://github.com/cs50/ide50",
-    version="1.0.4",
+    version="1.0.5",
     include_package_data=True
 )

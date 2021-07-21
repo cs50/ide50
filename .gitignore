@@ -2,6 +2,7 @@
 *.egg-info
 *.mo
 *.pyc
+!.github
 !.gitignore
 !.travis.yml
 build/
